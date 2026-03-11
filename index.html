@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KINGDOM OF SMART ASSIST – eFootball Gamers Arena</title>
+<style>
+body{font-family: Arial; background:#0b0b0b; color:white; text-align:center;}
+h1 {color:#00ff00; margin-top:30px;}
+h3 {color:#ffff00;}
+.menu a {margin:10px; color:yellow; text-decoration:none; font-size:20px;}
+button {padding:10px 20px; font-size:18px; background:green; color:white; border:none; cursor:pointer;}
+img {width:300px; margin:20px;}
+.box {margin-top:50px;}
+</style>
+</head>
+<body>
+
+<h1>KINGDOM OF SMART ASSIST</h1>
+<h3>eFootball Gamers Arena 🎮🏆</h3>
+
+<!-- Photo -->
+<img src="myphoto.jpg" alt="KINGDOM OF SMART ASSIST">
+
+<!-- Menu -->
+<div class="menu">
+<a href="login.html">Register / Login</a>
+<a href="players.html">Active Players</a>
+<a href="chat.html">Chat</a>
+<a href="leaderboard.html">Leaderboard</a>
+</div>
+
+<!-- Find Opponent -->
+<div class="box">
+<h2>Find Your Opponent</h2>
+<button onclick="findOpponent()">Find Opponent</button>
+<p id="result"></p>
+</div>
+
+<script>
+function findOpponent(){
+let players=["Player1","Player2","Player3","Player4"];
+let random = players[Math.floor(Math.random()*players.length)];
+document.getElementById("result").innerHTML="Opponent Found: "+random;
+}
+</script>
+
+</body>
+</html>

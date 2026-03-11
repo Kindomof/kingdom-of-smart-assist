@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat</title>
+</head>
+<body style="text-align:center; background:#101010; color:white;">
+<h1>Chat Page</h1>
+<p>Chat functionality placeholder.</p>
+</body>
+</html>                                    <!DOCTYPE html>
+<html>
+<head>
+<title>Chat</title>
+<style>
+body { font-family: Arial; background:#101010; color:white; text-align:center;}
+input, button { padding:10px; margin:5px; font-size:16px;}
+#chatBox { width:90%; height:300px; background:#1a1a1a; color:white; overflow-y:scroll; margin:10px auto; padding:10px; border-radius:5px;}
+</style>
+</head>
+<body>
+
+<h1>Chat Room</h1>
+
+<div id="chatBox"></div>
+
+<input type="text" id="message" placeholder="Type your message here">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+let chatBox = document.getElementById("chatBox");
+
+function sendMessage(){
+    let msg = document.getElementById("message").value;
+    if(msg.trim() !== ""){
+        let p = document.createElement("p");
+        p.textContent = "You: " + msg;
+        chatBox.appendChild(p);
+        document.getElementById("message").value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+}
+</script>
+
+</body>
+</html>

@@ -7,4 +7,64 @@
 <h1>Register / Login Page</h1>
 <p>This is a placeholder for Login/Register functionality.</p>
 </body>
+</html>                                    <!DOCTYPE html>
+<html>
+<head>
+  <title>Login / Register - KINGDOM OF SMART ASSIST</title>
+  <style>
+    body { font-family: Arial; background: #0b0b0b; color: white; text-align:center; }
+    h1 { color: #00ff00; margin-top:30px; }
+    input { padding:10px; margin:10px; width:200px; }
+    button { padding:10px 20px; background: green; color:white; border:none; cursor:pointer; }
+    .form-box { margin-top:50px; }
+  </style>
+</head>
+<body>
+  <h1>Login / Register</h1>
+  
+  <div class="form-box">
+    <h3>Login</h3>
+    <input type="text" placeholder="Username" id="loginUser"><br>
+    <input type="password" placeholder="Password" id="loginPass"><br>
+    <button onclick="login()">Login</button>
+  </div>
+  
+  <div class="form-box">
+    <h3>Register</h3>
+    <input type="text" placeholder="Username" id="regUser"><br>
+    <input type="password" placeholder="Password" id="regPass"><br>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <p id="message"></p>
+
+  <script>
+    let users = {}; // store usernames and passwords temporarily
+
+    function register() {
+      let user = document.getElementById("regUser").value;
+      let pass = document.getElementById("regPass").value;
+      if(user && pass){
+        if(users[user]){
+          document.getElementById("message").innerHTML = "Username already exists!";
+        } else {
+          users[user] = pass;
+          document.getElementById("message").innerHTML = "Registered successfully!";
+        }
+      } else {
+        document.getElementById("message").innerHTML = "Fill in all fields!";
+      }
+    }
+
+    function login() {
+      let user = document.getElementById("loginUser").value;
+      let pass = document.getElementById("loginPass").value;
+      if(users[user] && users[user] === pass){
+        document.getElementById("message").innerHTML = "Login successful! Welcome, " + user;
+      } else {
+        document.getElementById("message").innerHTML = "Invalid username or password!";
+      }
+    }
+  </script>
+</body>
 </html>

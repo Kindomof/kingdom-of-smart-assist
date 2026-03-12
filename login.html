@@ -86,4 +86,93 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-</script>
+</script>                                  <!DOCTYPE html>
+<html>
+<head>
+  <title>Login / Register - KINGDOM OF SMART ASSIST</title>
+  <style>
+    body { font-family: Arial; background: #0b0b0b; color: white; text-align:center; }
+    h1 { color: #00ff00; margin-top:30px; }
+    input { padding:10px; margin:10px; width:200px; }
+    button { padding:10px 20px; background: green; color:white; border:none; cursor:pointer; }
+    .form-box { margin-top:50px; }
+  </style>
+</head>
+<body>
+  <h1>Login / Register</h1>
+  
+  <div class="form-box">
+    <h3>Login</h3>
+    <input type="text" placeholder="Email" id="loginUser"><br>
+    <input type="password" placeholder="Password" id="loginPass"><br>
+    <button onclick="login()">Login</button>
+  </div>
+  
+  <div class="form-box">
+    <h3>Register</h3>
+    <input type="text" placeholder="Email" id="regUser"><br>
+    <input type="password" placeholder="Password" id="regPass"><br>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <p id="message"></p>
+
+  <!-- 🔹 Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    // 🔹 Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAwW94B97PjOnNkgDuLf6Ftf5vPsI9ObUM",
+      authDomain: "kingdom-smart-assist-58105.firebaseapp.com",
+      projectId: "kingdom-smart-assist-58105",
+      storageBucket: "kingdom-smart-assist-58105.firebasestorage.app",
+      messagingSenderId: "922622861443",
+      appId: "1:922622861443:web:5497de20ffbc2b8256bbb6",
+      measurementId: "G-1X5R2N96YP"
+    };
+
+    // 🔹 Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // 🔹 Register user
+    function register() {
+      let email = document.getElementById("regUser").value;
+      let password = document.getElementById("regPass").value;
+
+      if(email && password){
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            userCredential.user.sendEmailVerification();
+            document.getElementById("message").innerHTML = "Registered! Check your email for verification.";
+          })
+          .catch((error) => {
+            document.getElementById("message").innerHTML = error.message;
+          });
+      } else {
+        document.getElementById("message").innerHTML = "Fill in all fields!";
+      }
+    }
+
+    // 🔹 Login user
+    function login() {
+      let email = document.getElementById("loginUser").value;
+      let password = document.getElementById("loginPass").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          if(userCredential.user.emailVerified){
+            document.getElementById("message").innerHTML = "Login successful! Welcome, " + email;
+          } else {
+            document.getElementById("message").innerHTML = "Please verify your email first.";
+          }
+        })
+        .catch((error) => {
+          document.getElementById("message").innerHTML = error.message;
+        });
+    }
+  </script>
+</body>
+</html>

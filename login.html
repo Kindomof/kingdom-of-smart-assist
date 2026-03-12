@@ -67,4 +67,23 @@
     }
   </script>
 </body>
-</html>
+</html>                                   <script type="module">
+  // Import SDK functions
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+
+  // Firebase config daga console naka
+  const firebaseConfig = {
+    apiKey: "AIzaSyAwW94B97PjOnNkgDuLf6Ftf5vPsI9ObUM",
+    authDomain: "kingdom-smart-assist-58105.firebaseapp.com",
+    projectId: "kingdom-smart-assist-58105",
+    storageBucket: "kingdom-smart-assist-58105.firebasestorage.app",
+    messagingSenderId: "922622861443",
+    appId: "1:922622861443:web:5497de20ffbc2b8256bbb6",
+    measurementId: "G-1X5R2N96YP"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>

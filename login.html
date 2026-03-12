@@ -5,104 +5,45 @@
   <style>
     body { font-family: Arial; background: #0b0b0b; color: white; text-align:center; }
     h1 { color: #00ff00; margin-top:30px; }
-    input { padding:10px; margin:10px; width:200px; }
+    input { padding:10px; margin:10px; width:250px; }
     button { padding:10px 20px; background: green; color:white; border:none; cursor:pointer; }
-    .form-box { margin-top:50px; border:1px solid #555; padding:20px; display:inline-block; text-align:left; }
-    label { display:block; margin-top:10px; }
-    #message { margin-top:20px; color: yellow; }
-    a { color: #00ff00; text-decoration:none; display:block; margin-top:10px; }
+    a { color: #00ff00; text-decoration: none; }
+    .form-box { margin-top:50px; }
   </style>
 </head>
 <body>
   <h1>Login</h1>
   
   <div class="form-box">
-    <label>Username:</label>
-    <input type="text" id="loginUser">
-    <label>Password:</label>
-    <input type="password" id="loginPass">
+    <input type="text" placeholder="Username" id="loginUser"><br>
+    <input type="password" placeholder="Password" id="loginPass"><br>
     <button onclick="login()">Login</button>
-    <a href="register.html">Don't have an account? Register</a>
   </div>
 
   <p id="message"></p>
+  <p>Don't have an account? <a href="register.html">Register here</a></p>
+  <p><a href="#" onclick="forgotPassword()">Forgot Password?</a></p>
 
   <script>
-    // Offline users storage (temporary)
     let users = JSON.parse(localStorage.getItem("users") || "{}");
 
     function login() {
       let user = document.getElementById("loginUser").value.trim();
       let pass = document.getElementById("loginPass").value.trim();
+
       if(users[user] && users[user].password === pass){
         document.getElementById("message").innerHTML = "Login successful! Welcome, " + user;
       } else {
         document.getElementById("message").innerHTML = "Invalid username or password!";
       }
     }
-  </script>
-</body>
-</html<!DOCTYPE html>
-<html>
-<head>
-  <title>Register - KINGDOM OF SMART ASSIST</title>
-  <style>
-    body { font-family: Arial; background: #0b0b0b; color: white; text-align:center; }
-    h1 { color: #00ff00; margin-top:30px; }
-    input { padding:10px; margin:10px; width:200px; }
-    button { padding:10px 20px; background: green; color:white; border:none; cursor:pointer; }
-    .form-box { margin-top:50px; border:1px solid #555; padding:20px; display:inline-block; text-align:left; }
-    label { display:block; margin-top:10px; }
-    #message { margin-top:20px; color: yellow; }
-    a { color: #00ff00; text-decoration:none; display:block; margin-top:10px; }
-  </style>
-</head>
-<body>
-  <h1>Register</h1>
-  
-  <div class="form-box">
-    <label>Username:</label>
-    <input type="text" id="regUser">
-    <label>Password:</label>
-    <input type="password" id="regPass">
-    <label>Email:</label>
-    <input type="text" id="regEmail" placeholder="example@mail.com">
-    <label>Phone:</label>
-    <input type="text" id="regPhone" placeholder="08012345678">
-    <button onclick="register()">Register</button>
-    <a href="login.html">Already have an account? Login</a>
-  </div>
 
-  <p id="message"></p>
-
-  <script>
-    // Offline storage using localStorage
-    let users = JSON.parse(localStorage.getItem("users") || "{}");
-
-    function register() {
-      let user = document.getElementById("regUser").value.trim();
-      let pass = document.getElementById("regPass").value.trim();
-      let email = document.getElementById("regEmail").value.trim();
-      let phone = document.getElementById("regPhone").value.trim();
-
-      if(!user || !pass || !email || !phone){
-        document.getElementById("message").innerHTML = "Fill in all fields!";
-        return;
-      }
-      if(!email.includes("@")){
-        document.getElementById("message").innerHTML = "Invalid email!";
-        return;
-      }
-      if(!/^\d+$/.test(phone)){
-        document.getElementById("message").innerHTML = "Phone must be numbers!";
-        return;
-      }
+    function forgotPassword() {
+      let user = prompt("Enter your username to recover password:");
       if(users[user]){
-        document.getElementById("message").innerHTML = "Username already exists!";
+        alert("Your password is: " + users[user].password);
       } else {
-        users[user] = {password: pass, email: email, phone: phone};
-        localStorage.setItem("users", JSON.stringify(users));
-        document.getElementById("message").innerHTML = "Registered successfully!";
+        alert("Username not found!");
       }
     }
   </script>

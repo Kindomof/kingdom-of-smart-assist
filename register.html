@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - KINGDOM OF SMART ASSIST</title>
+  <style>
+    body { font-family: Arial; background: #0b0b0b; color: white; text-align:center; }
+    h1 { color: #00ff00; margin-top:30px; }
+    input { padding:10px; margin:10px; width:250px; }
+    button { padding:10px 20px; background: green; color:white; border:none; cursor:pointer; }
+    .form-box { margin-top:50px; }
+    a { color: #00ff00; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>Register</h1>
+  
+  <div class="form-box">
+    <input type="text" placeholder="Username" id="regUser"><br>
+    <input type="password" placeholder="Password" id="regPass"><br>
+    <input type="email" placeholder="Email" id="regEmail"><br>
+    <input type="text" placeholder="Phone number" id="regPhone"><br>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <p id="message"></p>
+  <p>Already have an account? <a href="login.html">Login here</a></p>
+
+  <script>
+    // Offline storage using localStorage
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+
+    function register() {
+      let user = document.getElementById("regUser").value.trim();
+      let pass = document.getElementById("regPass").value.trim();
+      let email = document.getElementById("regEmail").value.trim();
+      let phone = document.getElementById("regPhone").value.trim();
+
+      if(user && pass && email && phone){
+        if(users[user]){
+          document.getElementById("message").innerHTML = "Username already exists!";
+        } else {
+          users[user] = {password: pass, email: email, phone: phone};
+          localStorage.setItem("users", JSON.stringify(users));
+          document.getElementById("message").innerHTML = "Registered successfully!";
+        }
+      } else {
+        document.getElementById("message").innerHTML = "Fill in all fields!";
+      }
+    }
+  </script>
+</body>
+</html>
